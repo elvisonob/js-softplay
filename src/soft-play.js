@@ -11,50 +11,53 @@ let children = 0
 // TODO: Write your functions in the below section. Your functions should update
 // the adults and children variables defined above.
 
-let counter = 0
 
-function enter(numChildren, numAdults) {
+function occupancy() {
+    return {
 
-    if (numChildren > numAdults) {
-        return false
-
+        adults: adults,
+        children: children
     }
 
-    children = numChildren + children
-    adults = numAdults + adults
+}
+
+function enter(numAdults, numChildren) {
+
+    if (numAdults < numChildren) {
+        return false
+    }
+
+
+    adults = adults + numAdults
+    children = children + numChildren
     return true
+
 }
 
-function leave(numChildren, numAdults) {
+function leave(numAdults, numChildren) {
 
-    adults = numAdults - adults
-    children = numChildren - children
+    const adultsLeft = adults - numAdults
+    const childrenLeft = children - numChildren
 
-    if (numChildren < numAdults || numAdults < numChildren) {
+
+    if (adultsLeft === 0 && childrenLeft > 0) {
         return false
     }
 
-    if (numAdults > adults || numChildren > children) {
+    if (numChildren > 0 && numAdults === 0) {
         return false
     }
 
-    adults = numAdults - adults
-    children = numChildren - children
+    if (numChildren > children) {
+        return false
+    }
+
+
+    adults = adults - numAdults
+    children = children - numChildren
     return true
-}
-
-function occupancy(numChildren, numAdults) {
-    let count = {
-        'adults': adults,
-        'children': children
-    }
-    numChildren = count.children
-    numAdults = count.adults
-    return count
 
 }
-
-
 
 
 
